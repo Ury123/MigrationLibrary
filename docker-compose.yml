@@ -1,0 +1,19 @@
+version: "3.9"
+
+volumes:
+  db-data-library:
+    driver: local
+
+services:
+  postgres:
+    image: postgres:13.3
+    container_name: ${PG_CONTAINER_NAME}
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+      - "5432:5432"
+    volumes:
+      - db-data-library:/var/lib/postgresql/data
+    restart: unless-stopped
