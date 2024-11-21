@@ -1,5 +1,11 @@
 package com.innowise;
 
+import com.innowise.utils.PropertiesUtils;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -26,6 +32,24 @@ public class MigrationFileReader {
         } catch (Exception e) {
             e.printStackTrace();
             throw new RuntimeException("Ошибка при поиске файлов миграции в ресурсах", e);
+        }
+    }
+
+    public static String readSqlFileFromResources(String fileName) {
+        try (InputStream inputStream = MigrationFileReader.class
+                .getClassLoader()
+                .getResourceAsStream( PropertiesUtils.getProperty("migration.path") + "/" + fileName)) {
+
+            if (inputStream == null) {
+                throw new IOException("Файл миграции не найден: " + fileName);
+            }
+
+            return new BufferedReader(new InputStreamReader(inputStream))
+                    .lines()
+                    .collect(Collectors.joining("\n"));
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw new RuntimeException("Ошибка при чтении SQL-файла: " + fileName, e);
         }
     }
 

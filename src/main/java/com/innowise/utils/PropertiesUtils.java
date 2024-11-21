@@ -1,4 +1,4 @@
-package com.innowise;
+package com.innowise.utils;
 
 import java.io.IOException;
 import java.io.InputStream;
