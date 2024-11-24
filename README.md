@@ -12,6 +12,25 @@ maintaining a history of applied migrations, supporting rollbacks, and ensuring 
 - Logback
 - Docker
 
+## Functionality
+
+- **Managing database migrations**
+  - The program applies migrations defined as SQL files.
+  - Provides the ability to manage the sequence of migrations.
+- **Version controll**
+  - The program understands what is the current version of the database and what migrations need to be applied.
+  - If something goes wrong, the program rollback all applied migrations.
+- **Configuration**
+  - All settings are loaded from the application.properties file.
+- **Migration file sources**
+  - Migrations SQL files are loaded from application resources.
+- **Synchronizing migrations**
+  - The possibility of simultaneous migration run by different users is excluded.
+  - Implemented a locking mechanism to prevent conflicts
+- **Logging**
+  - The migration execution process is logged (start, successful execution, errors).
+  - The migration history is saved in a special table in the database
+
 ## Setup
 
 Clone the repository
