@@ -1,5 +1,7 @@
 package com.innowise.migration;
 
+import com.innowise.exeptions.MigrationsFileException;
+import com.innowise.exeptions.ReadingFilesException;
 import com.innowise.utils.PropertiesUtils;
 import lombok.extern.slf4j.Slf4j;
 
@@ -49,7 +51,7 @@ public class MigrationFileReader {
         } catch (Exception e) {
             e.printStackTrace();
             log.error("Ошибка при поиске файлов миграции в ресурсах");
-            throw new RuntimeException("Ошибка при поиске файлов миграции в ресурсах", e);
+            throw new MigrationsFileException("Ошибка при поиске файлов миграции в ресурсах", e);
         }
     }
 
@@ -76,7 +78,7 @@ public class MigrationFileReader {
         } catch (IOException e) {
             e.printStackTrace();
             log.error("Ошибка при чтении SQL-файла: {}", fileName);
-            throw new RuntimeException("Ошибка при чтении SQL-файла: " + fileName, e);
+            throw new ReadingFilesException("Ошибка при чтении SQL-файла: " + fileName, e);
         }
     }
 

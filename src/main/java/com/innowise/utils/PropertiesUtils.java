@@ -1,5 +1,6 @@
 package com.innowise.utils;
 
+import com.innowise.exeptions.PropertiesException;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
@@ -21,7 +22,7 @@ public class PropertiesUtils {
         } catch (IOException e) {
             e.printStackTrace();
             log.error("Ошибка при загрузке файла application.properties");
-            throw new RuntimeException("Ошибка при загрузке файла application.properties", e);
+            throw new PropertiesException("Ошибка при загрузке файла application.properties", e);
         }
     }
 

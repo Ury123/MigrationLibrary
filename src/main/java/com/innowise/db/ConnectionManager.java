@@ -1,5 +1,7 @@
 package com.innowise.db;
 
+import com.innowise.exeptions.DBConnectionException;
+import com.innowise.exeptions.DriverNotFoundException;
 import com.innowise.utils.PropertiesUtils;
 import lombok.extern.slf4j.Slf4j;
 
@@ -30,10 +32,10 @@ public class ConnectionManager {
         } catch (SQLException e) {
             e.printStackTrace();
             log.error("Ошибка подключения к базе данных");
-            throw new RuntimeException("Ошибка подключения к базе данных");
+            throw new DBConnectionException("Ошибка подключения к базе данных", e);
         } catch (ClassNotFoundException e) {
             log.error("Драйвер не найден");
-            throw new RuntimeException(e);
+            throw new DriverNotFoundException("Драйвер не найден", e);
         }
     }
 
